@@ -369,7 +369,7 @@ def run_network_trial(
     n_nodes: int = 120,
     p: float = 0.05,
     m: int = 2,
-    seed: int | None = None,
+    seed: int = 10, # adjusting to val 
     tol: float = 1e-3,
     patience: int = 30,
     collect: bool = False,
@@ -553,7 +553,7 @@ def phase_sweep_X0_vs_ratio(
     init_noise_I: float = 0.04,
     strategy_choice_func: str = "logit",
     tau: float = 1.0,
-    max_workers: int | None = None,
+    max_workers: int = 10, # adjusting 
     backend: str = "process",
 ) -> np.ndarray:
     """Compute a heatmap matrix of mean final adoption X* over (X0, ratio).
