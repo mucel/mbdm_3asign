@@ -197,6 +197,7 @@ class EVStagHuntModel(Model):
 
     def __init__(
         self,
+        G,
         initial_ev=10,
         a0=2.0,
         beta_I=3.0,
@@ -214,16 +215,11 @@ class EVStagHuntModel(Model):
     ):
         super().__init__(seed=seed)
 
-        # Build graph
-        if network_type == "BA":
-            G = nx.barabasi_albert_graph(n_nodes, m, seed=seed)
-        else:
-            G = nx.erdos_renyi_graph(n_nodes, p, seed=seed)
-        self.G = G
-        self.grid = NetworkGrid(G)
-        self.schedule = SimultaneousActivation(self)
 
         # parameters
+        self.G = G # provide graph externally
+        self.grid = NetworkGrid(G)
+        self.schedule = SimultaneousActivation(self)
         self.a0 = a0
         self.beta_I = beta_I
         self.b = b
@@ -319,6 +315,15 @@ def set_initial_adopters(model, X0_frac, method="random", seed=None, high=True):
     if method == "degree":
         deg = dict(model.G.degree())
         ordered_nodes = sorted(deg.keys(), key=lambda u: deg[u], reverse=high)
+        chosen = set(ordered_nodes[:k])
+        for a in agents:
+            if a.unique_id in chosen:
+                a.strategy = "C"
+        return
+    
+    if method == "betweenness":
+        bc = nx.betweenness_centrality(model.G, normalized=True)
+        ordered_nodes = sorted(bc.keys(), key=lambda u: bc[u], reverse=high)
         chosen = set(ordered_nodes[:k])
         for a in agents:
             if a.unique_id in chosen:
