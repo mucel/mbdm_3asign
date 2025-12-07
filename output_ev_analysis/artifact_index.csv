@@ -1,0 +1,5 @@
+artifact,path
+heatmap_png,output_ev_analysis/heatmap_final_adoption.png
+sensitivity_png,output_ev_analysis/sensitivity_betaI.png
+phase_plots_dir,output_ev_analysis
+tipping_estimates_csv,output_ev_analysis/tipping_estimates.csv
