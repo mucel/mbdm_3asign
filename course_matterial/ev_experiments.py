@@ -16,13 +16,13 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from concurrent.futures import ProcessPoolExecutor, ThreadPoolExecutor, as_completed
 
-from ev_core import (
+from course_matterial.ev_core import (
     EVStagHuntModel,
     set_initial_adopters,
     final_mean_adoption_vs_ratio,
     phase_sweep_X0_vs_ratio,
 )
-from ev_plotting import (
+from course_matterial.ev_plotting import (
     plot_fanchart,
     plot_spaghetti,
     plot_density,

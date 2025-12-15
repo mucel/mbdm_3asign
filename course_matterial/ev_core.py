@@ -227,6 +227,7 @@ class EVStagHuntModel(Model):
         self.step_count = 0
         self.strategy_choice_func = strategy_choice_func
         self.tau = tau
+        self.network_type = None # Placeholder for network type
 
         # initialize node attribute for agent reference
         for n in self.G.nodes:
